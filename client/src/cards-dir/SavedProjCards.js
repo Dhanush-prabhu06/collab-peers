@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MdDeleteOutline } from "react-icons/md"; // Delete icon
 import { FaRegEdit } from "react-icons/fa"; // Edit icon (or you can use it for another action if necessary)
+import toast from "react-hot-toast";
 
 const SavedProjCards = (props) => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const SavedProjCards = (props) => {
       );
 
       console.log("Project unsaved successfully", response.data);
-      alert("Project unsaved successfully");
+      toast.success("Project unsaved successfully");
       window.location.reload(); // Refresh the page after unsaving the project
     } catch (err) {
       console.log("Error:", err);

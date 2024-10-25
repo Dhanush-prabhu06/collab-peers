@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import imge from "../images/imge.jpg"; // Correct image import
-
+import toast from "react-hot-toast";
 const Signin = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -36,17 +36,17 @@ const Signin = () => {
       const Data = response.data;
 
       if (response.status === 201) {
-        window.alert("Login Successful");
+       toast.success("Login successful!");
         localStorage.setItem("authToken", Data.token);
         localStorage.setItem("username", Data.user.username);
 
         navigate("/home");
       } else {
-        window.alert("Invalid credentials");
+        toast.error("Invalid credentials");
       }
     } catch (error) {
       console.error("Error occurred during signin:", error.message);
-      window.alert("Invalid credentials");
+      toast.error("Invalid credentials");
     }
   };
 

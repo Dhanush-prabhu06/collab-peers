@@ -1,4 +1,5 @@
 import "./index.css";
+import { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter as Router,
   Route,
@@ -32,6 +33,7 @@ function AppContent() {
 
   return (
     <>
+    <Toaster position="top-right" toastOptions={{ duration: 8000 }} />
       {/* Conditionally render the Header */}
       {!hideHeaderRoutes.includes(location.pathname) && <Header />}
       <Routes>

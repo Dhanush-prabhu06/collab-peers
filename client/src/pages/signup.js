@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const colleges = [
   "National Institute of Technology Karnataka, Surathkal",
@@ -118,7 +119,6 @@ const colleges = [
   "Pooja Doddappa Appa College of Engineering, Gulbarga",
   "Veerappa Nisty Engineering College, Shorapur",
 ];
-
 const Signup = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -174,6 +174,7 @@ const Signup = () => {
         }
       );
       console.log("Response from backend:", response.data);
+      toast.success("Registration successful Please login!");
       navigate("/login");
     } catch (error) {
       if (error.response) {

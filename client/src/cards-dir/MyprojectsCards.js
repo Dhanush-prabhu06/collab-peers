@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const MyprojectCards = (props) => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const MyprojectCards = (props) => {
       );
 
       console.log("Project deleted successfully:", response.data);
-      alert("Project deleted successfully");
+      toast.success("Project deleted successfully")
       window.location.reload();
     } catch (error) {
       console.error("There was an error deleting the project:", error);

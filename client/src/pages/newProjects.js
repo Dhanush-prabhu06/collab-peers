@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProjectForm = () => {
   const [formData, setFormData] = useState({
@@ -125,11 +126,11 @@ const ProjectForm = () => {
         roles: [],
         deadline: "",
       });
-      alert("Project submitted successfully!");
+      toast.success("Project submitted successfully!");
       navigate("/my-projects");
     } catch (error) {
       console.error("There was an error submitting the project:", error);
-      alert("Error submitting project. Please try again.");
+      toast.error("Error submitting project. Please try again.");
     }
   };
 

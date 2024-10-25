@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { FiSave, FiEye } from "react-icons/fi"; // Import icons from React Icons
 
@@ -26,7 +27,7 @@ const Cards = (props) => {
       );
 
       console.log("Project saved successfully", response.data);
-      alert("Saved successfully");
+        toast.success("Project saved successfully");
     } catch (err) {
       console.log("Error:", err);
     }
