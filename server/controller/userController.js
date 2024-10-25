@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../model/userschema.js";
+import Users from "../model/userschema.js";
 const registerUser = async (req, res) => {
   try {
     const { username, email, password, cpassword, collegename, year, course } =
@@ -24,12 +24,12 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ error: "Passwords do not match" });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Users.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
     }
 
-    const newUser = await User.create({
+    const newUser = await Users.create({
       username,
       email,
       password,
@@ -50,7 +50,7 @@ const authUser = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ error: "Fill credentials" });
     }
-    const user = await User.findOne({ email: email });
+    const user = await Users.findOne({ email: email });
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!user) {
@@ -85,7 +85,7 @@ export const fetchoneUser = async (req, res) => {
     const decoded = jwt.verify(Token, process.env.SECRET_KEY);
     console.log(decoded);
 
-    const data = await User.findOne({ email: decoded.email });
+    const data = await Users.findOne({ email: decoded.email });
 
     res.status(200).send(data);
   } catch (err) {
@@ -110,7 +110,7 @@ export const updateUser = async (req, res) => {
       updateData.password = await bcrypt.hash(password, salt);
     }
 
-    const updatedUser = await User.findOneAndUpdate({ email }, updateData, {
+    const updatedUser = await Users.findOneAndUpdate({ email }, updateData, {
       new: true,
       runValidators: true,
     });
