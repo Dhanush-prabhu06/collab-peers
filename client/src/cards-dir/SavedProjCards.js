@@ -12,7 +12,7 @@ const SavedProjCards = (props) => {
   const [showUnsaveLabel, setShowUnsaveLabel] = useState(false);
   const [showDetailsLabel, setShowDetailsLabel] = useState(false);
 
-  // Unsave project function
+  // Unsave project function with delay for toast display
   const unsaveProject = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -32,7 +32,11 @@ const SavedProjCards = (props) => {
 
       console.log("Project unsaved successfully", response.data);
       toast.success("Project unsaved successfully");
-      window.location.reload(); // Refresh the page after unsaving the project
+
+      // Delay before refreshing the page to let the toast fully display
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500); // Adjust delay as needed (1.5 seconds here)
     } catch (err) {
       console.log("Error:", err);
     }

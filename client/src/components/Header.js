@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"; // Import user icon
 import logo from "../images/logo-removebg-preview.png"; // Update the logo import path accordingly
+import toast from "react-hot-toast"; // Import toast
 
 const Header = () => {
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
@@ -9,6 +10,11 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("username");
+    toast.success("Logged out successfully!"); 
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 4000);
+    // Add toast notification
     window.location.href = "/";
   };
 
