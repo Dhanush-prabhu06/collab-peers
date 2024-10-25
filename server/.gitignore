@@ -1,0 +1,58 @@
+# Node modules
+/node_modules
+
+# Build output
+/build
+/dist
+
+# Environment variables
+
+
+# Logs
+/logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# IDE configurations
+.idea/
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+/coverage
+
+# Compiled TypeScript files (if using TypeScript)
+*.tsbuildinfo
+
+# Package lock files (optional, but generally not recommended)
+package-lock.json
+yarn.lock
+
+# React specific
+*.css.map
+*.scss.map
+
+# Firebase
+firebase-debug.log
+
+# Miscellaneous
+*.tgz
+*.zips
+
+ ../$RECYCLE.BIN/
+        ../MERN PROJECTS/Resort-New/
+        ../MERN PROJECTS/frontendiee/
+        ../MERN PROJECTS/hackathon/
+        ../MERN PROJECTS/resort-old/
+        ../MERN PROJECTS/room-mern/
+        ../MERN PROJECTS/viva-fernleaf/
+        ../MINI-PROJECT/
+        ../ecommune/
+        ./
+        ../resort project/
