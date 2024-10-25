@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"; // Import user icon
+import logo from "../images/logo-removebg-preview.png"; // Update the logo import path accordingly
 
 const Header = () => {
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
@@ -37,7 +38,11 @@ const Header = () => {
     <nav className="sticky top-0 z-40 flex justify-between px-8 items-center bg-slate-200 h-16 shadow-md">
       {/* Logo Section */}
       <div className="text-xl font-bold text-gray-800 hover:cursor-pointer hover:underline">
-        <a href="/home">Logo</a>
+        <a href="/home">
+          <div className="flex items-center">
+            <img src={logo} alt="Logo" className="h-[150px] ml-[-40px] mr-auto" /> {/* Adjust the size as needed */}
+          </div>
+        </a>
       </div>
 
       {/* Navigation Links */}
@@ -46,16 +51,16 @@ const Header = () => {
           Projects
         </a>
         <a href="/my-projects" className="hover:text-[#6366F1] hover:underline">
-          MyProjects
+          My Projects
         </a>
         <a href="/new-project" className="hover:text-[#6366F1] hover:underline">
-          NewProjects
+          New Projects
         </a>
         <a href="/save" className="hover:text-[#6366F1] hover:underline">
-          SavedProjects
+          Saved Projects
         </a>
         <a href="/chat" className="hover:text-[#6366F1] hover:underline">
-          chat
+          Chat
         </a>
       </div>
 

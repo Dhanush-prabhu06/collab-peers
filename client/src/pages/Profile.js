@@ -16,7 +16,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/user/profile', {
+        const response = await axios.get('http://localhost:8000/api/user/fetch', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +31,7 @@ const Profile = () => {
 
     fetchUserData();
   }, []);
-
+//console.log(userData);
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -56,11 +56,11 @@ const Profile = () => {
   return (
     <>
         <div>
-            <div>Name: </div>
-            <div>Email:</div>
-            <div>College name:</div>
-            <a href=""><div>update</div></a>
-            <div onClick={handleDelete}>delete</div>
+            <div>Name:{userData.name}</div>
+            <div>Email:{userData.email}</div>
+            <div>College name:{userData.collegename}</div>
+            <div>course name:{userData.course}</div>
+            <div>Year:{userData.year}</div>
         </div>
     </>
   );

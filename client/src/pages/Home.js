@@ -75,10 +75,10 @@ const Home = () => {
       <div className="mt-10 z-0">
         {/* Display the selected college and year */}
         <h3 className="sticky top-[180px] z-50 text-[#6366F1]">
-          selected college: {searchedCollege || "All Colleges"}
+          <strong className="text-slate-950 text-base">selected college:</strong> {searchedCollege || "All Colleges"}
         </h3>
         <h4 className="sticky top-[200px] z-50 text-[#6366F1]">
-          Selected Year: {year || "All Years"}
+        <strong className="text-slate-950  text-base"> Selected Year:</strong> {year || "All Years"}
         </h4>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
