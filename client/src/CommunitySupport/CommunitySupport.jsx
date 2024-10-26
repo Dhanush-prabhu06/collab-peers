@@ -2,8 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import io from "socket.io-client";
-import SideBar from "./SideBar";
-import ChatPanel from "./Channels/ChatPanel";
+//import SideBar from "./SideBar";
+//import ChatPanel from "./Channels/ChatPanel";
 import ChatArea from "./Channels/ChatArea";
 import exit from "./exit.png";
 import "./communityPage.css";
@@ -62,11 +62,11 @@ const CommunitySupport = () => {
       </div>
 
       <div className="community-main-page">
-        <SideBar />
-        <ChatPanel
+        {/* <SideBar /> */}
+        {/* <ChatPanel
           onChannelChange={handleChannelChange}
           activeChannel={activeChannel}
-        />
+        /> */}
         <ChatArea socket={socket} activeChannel={activeChannel} />
       </div>
     </>

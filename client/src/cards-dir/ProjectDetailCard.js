@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 const ProjectDetailCard = (props) => {
   const id = props.id;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [file, setFile] = useState(null); // File input state
+  const [description, setDescription] = useState(""); // Description input state
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,7 +39,7 @@ const ProjectDetailCard = (props) => {
     };
 
     fetchUsers();
-  }, []);
+  }, [id]);
 
   const projData = data.data || {};
 
@@ -49,6 +51,38 @@ const ProjectDetailCard = (props) => {
       month: "2-digit",
       year: "numeric",
     });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("projectname", projData.projectname);
+    formData.append("receiveremail",projData.email);
+    formData.append("description", description);
+
+    if (file) {
+      formData.append("file", file); // Append file only if it's selected
+    }
+
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await axios.post(
+        "http://localhost:8000/api/apply",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Application submitted successfully:", response.data);
+      setIsModalOpen(false); // Close the modal on success
+    } catch (error) {
+      console.error("Error submitting application:", error);
+    }
   };
 
   return (
@@ -112,16 +146,63 @@ const ProjectDetailCard = (props) => {
           </p>
         </div>
 
-        <div className="mt-6">
-          <h3 className="text-lg font-medium text-gray-800">Contact:</h3>
-          <div className="mt-2">
-            <span className="font-medium text-gray-700">WhatsApp</span>
-          </div>
-          <div className="mt-2">
-            <span className="font-medium text-gray-700">Email</span>
-          </div>
+        <div className="mt-6 flex justify-center">
+          <button
+            className="bg-indigo-500 w-32 text-[#ffff] h-14 rounded-lg"
+            onClick={() => setIsModalOpen(true)} // Open modal on click
+          >
+            Apply now
+          </button>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-md shadow-lg w-96">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              Apply for the Project
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">About Yourself</label>
+                <textarea
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Upload Resume (Optional)</label>
+                <input
+                  type="file"
+                  className="w-full border border-gray-300 p-2"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  accept=".pdf"
+                />
+              </div>
+
+              <div className="flex justify-between">
+                <button
+                  type="button"
+                  className="bg-gray-300 px-4 py-2 rounded"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-indigo-500 text-white px-4 py-2 rounded"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -130,8 +211,6 @@ const Skills = (props) => {
   const data = props.roles || []; // Fallback to empty array if roles is undefined
   return (
     <div className="flex flex-wrap gap-4">
-      {" "}
-      {/* Use flex-wrap to handle overflow */}
       {data.map((element, index) => (
         <div key={index} className="bg-gray-200 p-2 rounded">
           {element}
@@ -142,11 +221,9 @@ const Skills = (props) => {
 };
 
 const Technologies = (props) => {
-  const data = props.technology || []; // Fallback to empty array if technology is undefined
+  const data = props.technology || [];
   return (
     <div className="flex flex-wrap gap-4">
-      {" "}
-      {/* Use flex-wrap to handle overflow */}
       {data.map((element, index) => (
         <div key={index} className="bg-gray-200 p-2 rounded">
           {element}

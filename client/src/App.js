@@ -33,7 +33,7 @@ function AppContent() {
 
   return (
     <>
-    <Toaster position="top-right" toastOptions={{ duration: 8000 }} />
+    <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
       {/* Conditionally render the Header */}
       {!hideHeaderRoutes.includes(location.pathname) && <Header />}
       <Routes>

@@ -65,7 +65,7 @@ const Header = () => {
         <a href="/save" className="hover:text-[#6366F1] hover:underline">
           Saved Projects
         </a>
-        <a href="/chat" className="hover:text-[#6366F1] hover:underline">
+        <a href="/chat/dm" className="hover:text-[#6366F1] hover:underline">
           Chat
         </a>
       </div>

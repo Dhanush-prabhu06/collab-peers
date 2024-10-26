@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import io from "socket.io-client";
-import SideBar from "../SideBar";
+//import SideBar from "../SideBar";
 
 import "../communityPage.css";
 import DMPanel from "./DMPanel";
@@ -49,7 +49,7 @@ const DMPage = () => {
 
   return (
     <div className="community-main-page">
-      <SideBar />
+      {/* <SideBar /> */}
       <DMPanel onUserSelect={handleUserSelect} activeUser={selectedUser} />
       <DMChatArea selectedUser={selectedUser} />
     </div>
